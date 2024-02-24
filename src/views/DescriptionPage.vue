@@ -1,20 +1,20 @@
 <template>
-  <HeaderBlock title="НАША ПРОДУКЦИЯ" />
-  <MainBlock />
+    <HeaderBlock descriptionItem/>
+    <MainDescriptionBlock />
 </template>
 
 <script>
 import HeaderBlock from '@/components/blocks/HeaderBlock.vue'
-import MainBlock from '@/components/blocks/MainBlock.vue'
+import MainDescriptionBlock from '@/components/blocks/MainDescriptionBlock.vue'
 import { computed, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
 export default {
-  name: 'MainPage',
+  name: 'DescriptionPage',
   components: {
     HeaderBlock,
-    MainBlock
+    MainDescriptionBlock
   },
   props: {
   },

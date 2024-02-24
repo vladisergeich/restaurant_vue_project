@@ -1,6 +1,6 @@
 <template>
   <main class="container main">
-    <CardElement v-for="(product,index) in basketProducts" :key="product.id"
+    <CardElement v-for="product in basketProducts" :key="product.id"
       :name="product.name"
       :description="product.description"
       :price="product.price"
@@ -10,7 +10,8 @@
       basketList
       buttonRotate="45deg"
       buttonColor="var(--color-dynamic)"
-      @clickButton="deleteFromBasket(index)"
+      buttonText="+"
+      @clickButton="deleteFromBasket(product.id)"
     />
   </main>
 </template>
@@ -29,6 +30,7 @@ export default {
   },
   setup () {
     const store = useStore()
+
     const basketProducts = computed(() => {
       return store.getters.getBasketProducts
     })
@@ -44,15 +46,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    main {
-        background: var(--color-main-background);
-        padding: 38px 0px 102px 0px;
-        color: var(--color-main);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        row-gap: 31px;
-        min-height: calc(100vh - 375px);
-        height: 100%;
-    }
+  main {
+    background: var(--color-main-background);
+    padding: 38px 0px 102px 0px;
+    color: var(--color-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 31px;
+    min-height: calc(100vh - 375px);
+    height: 100%;
+  }
 </style>

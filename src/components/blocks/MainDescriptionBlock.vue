@@ -1,14 +1,16 @@
 <template>
   <main class="container main">
-    <CardElement v-for="product in products" :key="product.id"
+    <CardElement class="main__card" v-for="(product) in products" :key="product.id"
       :name="product.name"
       :description="product.description"
       :price="product.price"
       :preview="require(`@/assets/images/${product.image}`)"
-      buttonText="+"
-      :buttonRotate="basketProducts.find(data => data.id === product.id) ? '45deg' : '0deg'"
+      imgHeight="503px"
+      imgWidth="501px"
+      descriptionItem
+      :buttonText="basketProducts.find(data => data.id === product.id) ? 'Убрать из корзины' : 'В корзину'"
+      buttonRectangle
       @clickButton="basketProducts.find(data => data.id === product.id) ? deleteFromBasket(product.id) : addToBasket(product.id)"
-      @click="getDescriptionPage(product.id)"
     />
   </main>
 </template>
@@ -16,11 +18,11 @@
 <script>
 import CardElement from '@/components/elements/CardElement.vue'
 import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { computed } from 'vue'
 
 export default {
-  name: 'MainBlock',
+  name: 'MainDescriptionBlock',
   components: {
     CardElement
   },
@@ -28,10 +30,10 @@ export default {
   },
   setup () {
     const store = useStore()
-    const router = useRouter()
+    const route = useRoute()
 
     const products = computed(() => {
-      return store.getters.getProducts
+      return store.getters.getProducts.filter(item => { return item.id === Number(route.params.id) })
     })
     const basketProducts = computed(() => {
       return store.getters.getBasketProducts
@@ -42,15 +44,11 @@ export default {
     const deleteFromBasket = (id) => {
       store.commit('SetDeleteBasketProducts', id)
     }
-    const getDescriptionPage = (id) => {
-      router.push(`/description/${id}`)
-    }
     return {
       products,
       basketProducts,
       addToBasket,
-      deleteFromBasket,
-      getDescriptionPage
+      deleteFromBasket
     }
   }
 }
@@ -58,14 +56,13 @@ export default {
 
 <style lang="scss" scoped>
   .main {
-    background: var(--color-main-background);
-    padding: 27px 68px 67px 70px;
+    height: 100vh;
+    background-image: url('@/assets/images/descriptionPage_background.png');
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    row-gap: 35px;
-    column-gap: 20px;
-    min-height: calc(100vh - 257px);
-    height: 100%;
+
+    &__card {
+        margin-top: clamp(340px, calc(50vh - 186px / 2), 100vh);
+    }
   }
 </style>
