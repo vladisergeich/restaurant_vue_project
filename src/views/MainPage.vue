@@ -1,11 +1,11 @@
 <template>
   <HeaderBlock title="НАША ПРОДУКЦИЯ" />
-  <MainBlock />
+  <ItemList />
 </template>
 
 <script>
 import HeaderBlock from '@/components/blocks/HeaderBlock.vue'
-import MainBlock from '@/components/blocks/MainBlock.vue'
+import ItemList from '@/components/blocks/ItemList.vue'
 import { computed, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
@@ -14,7 +14,7 @@ export default {
   name: 'MainPage',
   components: {
     HeaderBlock,
-    MainBlock
+    ItemList
   },
   props: {
   },
@@ -33,7 +33,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

@@ -20,7 +20,7 @@ import { useRouter } from 'vue-router'
 import { computed } from 'vue'
 
 export default {
-  name: 'MainBlock',
+  name: 'ItemList',
   components: {
     CardElement
   },
